@@ -12,7 +12,7 @@ namespace CompositeExercise
      * 
      * Complete the implementation of the interfaces so that Sum() begins to work correctly.
      */
-    public interface IValueContainer
+    public interface IValueContainer : IEnumerable<int>
     {
 
     }
@@ -20,11 +20,21 @@ namespace CompositeExercise
     public class SingleValue : IValueContainer
     {
         public int Value;
+
+        public IEnumerator<int> GetEnumerator()
+        {
+            yield return this.Value;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
     }
 
     public class ManyValues : List<int>, IValueContainer
     {
-
+  
     }
 
     public static class ExtensionMethods
